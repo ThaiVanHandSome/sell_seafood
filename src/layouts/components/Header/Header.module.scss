@@ -1,0 +1,34 @@
+.header-main {
+    height: 60px;
+    background-color: #0073a0;
+    border-radius: 0 0 40px 40px;
+}
+
+.list-nav {
+    list-style: none;
+    margin: 0;
+}
+
+.nav-item {
+    margin: 0 11px;
+}
+
+.nav-item-divider {
+    margin: 0 7.5px;
+}
+
+.nav-item:first-child {
+    margin-left: 0 !important;
+}
+
+.nav-item-link {
+    color: var(--bs-white) !important;
+    padding: 10px 0;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.divider {
+    height: 30px;
+    border: 1px solid #ffffff80;
+}

@@ -1,9 +1,8 @@
 @import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap');
 
 :root {
-    --primary: #fe2c55;
-    --black: #000;
-    --white: #fff;
+    --primary: #2e9ed5;
     --text-color: #333;
 }
 
@@ -14,11 +13,11 @@
 }
 
 html {
-    font-size: 62.5%;
+    font-size: 62.5% !important;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Lexend', sans-serif !important;
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;

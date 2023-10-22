@@ -1,0 +1,11 @@
+.wrapper {
+    display: block;
+    position: relative;
+    min-width: 300px;
+    border-radius: 10px;
+    padding: 20px;
+    border: none;
+    outline: none;
+    box-shadow: 1px 1px 15px rgb(0 0 0 / 15%);
+    background-color: var(--bs-white);
+}
