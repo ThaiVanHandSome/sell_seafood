@@ -1,3 +1,25 @@
+.wrapper {
+    background-color: var(--primary);
+    border-radius: 0 0 60px 60px;
+}
+
+.header-container {
+    max-width: 1420px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+// Header main
+.header-main,
+.header-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+}
+
 .header-main {
     height: 60px;
     background-color: #0073a0;
@@ -13,8 +35,10 @@
     margin: 0 11px;
 }
 
-.nav-item-divider {
+.divider {
     margin: 0 7.5px;
+    height: 30px;
+    border: 1px solid #ffffff80;
 }
 
 .nav-item:first-child {
@@ -22,13 +46,103 @@
 }
 
 .nav-item-link {
+    display: block;
     color: var(--bs-white) !important;
     padding: 10px 0;
     font-size: 1.6rem;
     cursor: pointer;
 }
 
-.divider {
-    height: 30px;
-    border: 1px solid #ffffff80;
+// Menu
+.nav-item-menu {
+    list-style: none;
+}
+
+.nav-menu-link {
+    display: block;
+    padding: 10px 0;
+    border-bottom: 1px solid #ececec;
+    font-size: 1.6rem;
+    color: rgba(102, 102, 102, 0.85) !important;
+
+    &:hover {
+        font-weight: 700;
+        color: var(--bs-dark) !important;
+    }
+}
+
+.nav-item-menu li:last-child > .nav-menu-link {
+    border: none;
+}
+
+// Header bottom
+.header-bottom {
+    height: 90px;
+    min-height: 90px;
+    background-color: var(--primary);
+    border-radius: 0 0 60px 60px;
+}
+
+.search-container {
+    width: 50%;
+    background-color: #e6e8ee6b;
+    border-radius: 99px;
+}
+
+.search-selection,
+.search-inp {
+    color: var(--bs-white) !important;
+    font-size: 1.6rem;
+    height: 5rem;
+    background-color: transparent;
+    border-color: #e6e8ee00;
+}
+
+.search-selection {
+    width: 200px;
+    border-radius: 99px 0px 0px 99px;
+    padding: 0 24px 0 12px;
+
+    option {
+        color: var(--bs-dark);
+    }
+}
+
+.search-inp {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 12px;
+}
+
+.search-btn {
+    display: block;
+    background-image: linear-gradient(98deg, #ffffff 0%, #ffffff 100%);
+    padding: 14px;
+    box-shadow: 0px 3px 25px 0px rgb(255 255 255 / 50%);
+    border-radius: 50%;
+    font-size: 1.6rem;
+    margin-right: 4px;
+}
+
+.header-bottom-nav {
+    ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+    }
+
+    li {
+        a {
+            font-size: 1.6rem;
+            color: var(--bs-white) !important;
+            margin: 0 8px;
+        }
+    }
+}
+
+// Mobile
+.mobile-nav-icon {
+    font-size: 2.2rem;
+    color: var(--bs-white);
+    cursor: pointer;
 }

@@ -7,9 +7,13 @@ const initialState = {
 };
 
 const categorySlice = createSlice({
-    name: 'categories',
+    name: 'category',
     initialState,
-    reducers: {},
+    reducers: {
+        reNewData: async (state) => {
+            return await findAll();
+        },
+    },
 });
 
 const categoryReducer = categorySlice.reducer;
