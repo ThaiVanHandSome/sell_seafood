@@ -1,8 +1,19 @@
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Tippy from '@tippyjs/react/headless';
-import { Offcanvas, OffcanvasHeader, OffcanvasBody } from 'reactstrap';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css'; // optional
+import {
+    Offcanvas,
+    OffcanvasBody,
+    Accordion,
+    AccordionItem,
+    AccordionHeader,
+    AccordionBody,
+} from 'reactstrap';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDown, faBars, faCartShopping, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faBars, faCartShopping, faClose, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
@@ -10,20 +21,29 @@ import styles from './Header.module.scss';
 import { routes } from '~/config';
 import { PhoneRungIcon, TruckIcon } from '~/components/Icons';
 import Popper from '~/components/Popper';
-import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { socialIcons } from '~/data_static/socialIcons';
+import HeadlessTippy from './HeadlessTippy';
 
 const cx = classNames.bind(styles);
 
 function Header() {
     const [openMenu, setOpenMenu] = useState(false);
     const [openCart, setOpenCart] = useState(false);
+    const [openAccordion, setOpenAccordion] = useState('1');
 
     const toggle = (setState) => {
         setState((prev) => !prev);
     };
+
+    const toggleAccordion = (id) => {
+        if (openAccordion === id) {
+            setOpenAccordion('');
+        } else {
+            setOpenAccordion(id);
+        }
+    };
+
     const categories = useSelector((state) => state.categoryReducer.list);
-    const dispatch = useDispatch();
 
     return (
         <header className={cx('wrapper')}>
@@ -47,16 +67,11 @@ function Header() {
                                 Giới thiệu
                             </Link>
                         </li>
-                        <Tippy
-                            interactive
-                            placement="top-start"
-                            offset={[-20, 0]}
-                            delay={[100, 0]}
-                            zIndex={100}
+                        <HeadlessTippy
                             render={(attrs) => (
                                 <Popper>
-                                    <div className={cx('nav-item-menu')}>
-                                        <ul className="p-0" style={{ listStyle: 'none' }}>
+                                    <div className={cx('nav-item-menu')} {...attrs}>
+                                        <ul>
                                             {categories.map((category, index) => (
                                                 <li key={index} style={{ margin: '0 10px' }}>
                                                     <Link
@@ -78,7 +93,7 @@ function Header() {
                                     <FontAwesomeIcon className="fs-5" icon={faArrowDown} />
                                 </Link>
                             </li>
-                        </Tippy>
+                        </HeadlessTippy>
                         <li className={cx('nav-item')}>
                             <Link className={cx('nav-item-link')} to={routes.home}>
                                 Liên hệ
@@ -105,10 +120,68 @@ function Header() {
                         <div className={cx('mobile-nav-icon')} onClick={() => setOpenMenu(true)}>
                             <FontAwesomeIcon icon={faBars} />
                         </div>
-                        <Offcanvas isOpen={openMenu} toggle={() => toggle(setOpenMenu)}>
-                            <OffcanvasHeader toggle={() => toggle(setOpenMenu)}>Offcanvas</OffcanvasHeader>
-                            <OffcanvasBody>
-                                <strong>This is the Offcanvas body.</strong>
+                        <Offcanvas style={{ maxWidth: '260px' }} isOpen={openMenu} toggle={() => toggle(setOpenMenu)}>
+                            <OffcanvasBody className="p-0">
+                                <div className={cx('mobile-menu')}>
+                                    <ul>
+                                        <li className={cx('mobile-menu-item')}>
+                                            <Link className={cx('mobile-menu-link')} to={routes.home}>
+                                                Trang chủ
+                                            </Link>
+                                        </li>
+                                        <li className={cx('mobile-menu-item')}>
+                                            <Link className={cx('mobile-menu-link')} to={routes.home}>
+                                                Giới thiệu
+                                            </Link>
+                                        </li>
+                                        <Accordion open={openAccordion} toggle={toggleAccordion}>
+                                            <AccordionItem>
+                                                <AccordionHeader targetId="1">
+                                                    <li className={cx('mobile-menu-item')}>
+                                                        <Link className={cx('mobile-menu-link')} to={routes.home}>
+                                                            Cửa hàng
+                                                        </Link>
+                                                    </li>
+                                                </AccordionHeader>
+                                                <AccordionBody accordionId="1">
+                                                    <ul style={{ paddingLeft: '26px', paddingTop: '12px' }}>
+                                                        {categories.map((category, index) => (
+                                                            <li key={index}>
+                                                                <Link
+                                                                    className={cx('mobile-menu-item-menu')}
+                                                                    to={`category/${category.id}`}
+                                                                >
+                                                                    {category.name}
+                                                                </Link>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </AccordionBody>
+                                            </AccordionItem>
+                                        </Accordion>
+                                        <li className={cx('mobile-menu-item')}>
+                                            <Link className={cx('mobile-menu-link')} to={routes.home}>
+                                                Liên hệ
+                                            </Link>
+                                        </li>
+                                        <li className={cx('mobile-menu-item')}>
+                                            <Link className={cx('mobile-menu-link')} to={routes.home}>
+                                                Tin tức
+                                            </Link>
+                                        </li>
+                                        <li className={cx('mobile-menu-item')}>
+                                            <div className={cx('social-icons')}>
+                                                {socialIcons.map((item, index) => (
+                                                    <Tippy content={item.tooltip}>
+                                                        <a key={index} href={item.href}>
+                                                            {item.icon}
+                                                        </a>
+                                                    </Tippy>
+                                                ))}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </OffcanvasBody>
                         </Offcanvas>
                     </div>
@@ -121,10 +194,21 @@ function Header() {
                     />
                     <div className={cx('mobile-nav-icon')}>
                         <FontAwesomeIcon icon={faCartShopping} onClick={() => setOpenCart(true)} />
-                        <Offcanvas isOpen={openCart} direction="end" toggle={() => toggle(setOpenCart)}>
-                            <OffcanvasHeader toggle={() => toggle(setOpenCart)}>Offcanvas</OffcanvasHeader>
+                        <Offcanvas
+                            style={{ maxWidth: '260px' }}
+                            isOpen={openCart}
+                            direction="end"
+                            toggle={() => toggle(setOpenCart)}
+                        >
                             <OffcanvasBody>
-                                <strong>This is the Offcanvas body.</strong>
+                                <div className={cx('mobile-cart')}>
+                                    <button className={cx('mobile-cart-btn-close')} onClick={() => toggle(setOpenCart)}>
+                                        <FontAwesomeIcon icon={faClose} />
+                                    </button>
+                                    <h1 className={cx('mobile-cart-heading')}>Giỏ hàng</h1>
+                                    <div className={cx('is-divider')}></div>
+                                    <p className={cx('mobile-cart-text')}>Chưa có sản phẩm trong giỏ hàng</p>
+                                </div>
                             </OffcanvasBody>
                         </Offcanvas>
                     </div>
@@ -171,12 +255,7 @@ function Header() {
                                 </Link>
                             </li>
                             <li className={cx('divider')}></li>
-                            <Tippy
-                                interactive
-                                placement="bottom-start"
-                                offset={[-20, 12]}
-                                delay={[100, 0]}
-                                zIndex={100}
+                            <HeadlessTippy
                                 render={(attrs) => (
                                     <Popper>
                                         <div {...attrs}>
@@ -190,7 +269,7 @@ function Header() {
                                         <FontAwesomeIcon icon={faCartShopping} />
                                     </Link>
                                 </li>
-                            </Tippy>
+                            </HeadlessTippy>
                             <li className={cx('divider')}></li>
                             <li>
                                 <Link className="d-flex align-items-center" to={routes.home}>

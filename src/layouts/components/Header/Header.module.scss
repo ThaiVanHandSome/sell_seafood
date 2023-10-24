@@ -146,3 +146,116 @@
     color: var(--bs-white);
     cursor: pointer;
 }
+
+.mobile-menu {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px 0;
+}
+
+.mobile-menu-item {
+    border-top: 1px solid rgb(236, 236, 236);
+}
+
+.mobile-menu-item:first-child {
+    border-top: none;
+}
+
+.mobile-menu-link {
+    display: block;
+    padding: 15px 0 15px 20px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: rgba(102, 102, 102, 0.85) !important;
+    transition: all 0.3s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        color: rgba(17, 17, 17, 0.85);
+    }
+}
+
+.mobile-menu-item-menu {
+    display: block;
+    padding: 5px 0;
+    font-size: 1.6rem;
+    color: #666 !important;
+    cursor: pointer;
+
+    &:hover {
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: var(--bs-dark) !important;
+    }
+}
+
+.social-icons {
+    padding: 20px;
+    font-size: 2rem;
+
+    a {
+        color: #999 !important;
+        margin-right: 12px;
+        transition: all 0.1s;
+
+        &:hover {
+            color: #0073a0 !important;
+        }
+    }
+}
+
+// Mobile cart
+.mobile-cart {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 24px;
+}
+
+.mobile-cart-btn-close {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    font-size: 2.4rem;
+    color: #666;
+    background-color: transparent;
+    animation: btnCloseAppear linear 0.5s;
+}
+
+@keyframes btnCloseAppear {
+    from {
+        top: 10px;
+        opacity: 0;
+    }
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+.mobile-cart-heading {
+    font-size: 2.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    margin-bottom: 6px;
+}
+
+.is-divider {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    display: block;
+    height: 3px;
+    width: 18%;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.mobile-cart-text {
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: rgb(53, 54, 54);
+    text-align: center;
+}

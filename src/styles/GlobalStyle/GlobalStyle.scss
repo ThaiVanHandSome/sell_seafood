@@ -36,6 +36,35 @@ a[href] {
     text-decoration: none;
 }
 
+html {
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+}
+
+// Accordion
+.accordion-item {
+    border: none !important;
+}
+.accordion-button {
+    padding: 0 !important;
+    border: none !important;
+    border-color: transparent !important;
+}
+
+.accordion-button:focus {
+    outline: none !important;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: transparent !important;
+}
+
+.accordion-body {
+    padding: 0 !important;
+}
+
 // // Responsive
 // @include media-breakpoint-up(sm) {
 // }
