@@ -1,0 +1,117 @@
+.wrapper {
+    padding-top: 30px;
+    display: flex;
+}
+
+.container {
+    max-width: 1420px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.menu-category {
+    li {
+        border-top: 1px solid #ececec;
+        a {
+            display: flex;
+            align-items: center;
+            padding: 11px 0;
+            color: #0a0a0a;
+            font-size: 1.6rem;
+            font-weight: 300;
+
+            &:hover {
+                color: #0073a0;
+                font-weight: 600;
+            }
+
+            img {
+                margin-right: 10px;
+            }
+        }
+
+        &:first-child {
+            border-top: none;
+        }
+    }
+}
+
+// Slider
+.slider-wrapper {
+    position: relative;
+    border-radius: 20px;
+
+    &:hover {
+        .slider-control-btn {
+            opacity: 1;
+        }
+        .slider-control-btn-left {
+            left: 2%;
+        }
+        .slider-control-btn-right {
+            right: 2%;
+        }
+    }
+}
+
+.slider-control-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    --size: 36px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    border: 2px solid #fff;
+    font-size: 2.2rem;
+    color: #fff;
+    transition: all 0.3s;
+    opacity: 0;
+    cursor: pointer;
+
+    &.slider-control-btn-left {
+        left: 0;
+    }
+
+    &.slider-control-btn-right {
+        right: 0;
+    }
+
+    &:hover {
+        border-color: #2e9ed5;
+        background-color: #2e9ed5;
+    }
+}
+
+.slider-indicators {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 4%;
+    display: flex;
+    align-items: center;
+}
+
+.slider-indicators-item {
+    --size: 14px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    margin: 0 4px;
+    border: 3px solid #fff;
+    opacity: 0.4;
+    transition: all 0.3s;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    &.active {
+        background-color: #fff;
+        opacity: 1;
+    }
+}

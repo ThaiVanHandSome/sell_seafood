@@ -3,14 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
-import {
-    Offcanvas,
-    OffcanvasBody,
-    Accordion,
-    AccordionItem,
-    AccordionHeader,
-    AccordionBody,
-} from 'reactstrap';
+import { Offcanvas, OffcanvasBody, Accordion, AccordionItem, AccordionHeader, AccordionBody } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown, faBars, faCartShopping, faClose, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -23,10 +16,12 @@ import { PhoneRungIcon, TruckIcon } from '~/components/Icons';
 import Popper from '~/components/Popper';
 import { socialIcons } from '~/data_static/socialIcons';
 import HeadlessTippy from './HeadlessTippy';
+import AccordionWrapper from '~/components/Accordion';
 
 const cx = classNames.bind(styles);
 
 function Header() {
+    const categories = useSelector((state) => state.categoryReducer.list);
     const [openMenu, setOpenMenu] = useState(false);
     const [openCart, setOpenCart] = useState(false);
     const [openAccordion, setOpenAccordion] = useState('1');
@@ -43,7 +38,7 @@ function Header() {
         }
     };
 
-    const categories = useSelector((state) => state.categoryReducer.list);
+    console.log('re-render');
 
     return (
         <header className={cx('wrapper')}>
@@ -134,7 +129,7 @@ function Header() {
                                                 Giới thiệu
                                             </Link>
                                         </li>
-                                        <Accordion open={openAccordion} toggle={toggleAccordion}>
+                                        {/* <Accordion open={openAccordion} toggle={toggleAccordion}>
                                             <AccordionItem>
                                                 <AccordionHeader targetId="1">
                                                     <li className={cx('mobile-menu-item')}>
@@ -158,7 +153,30 @@ function Header() {
                                                     </ul>
                                                 </AccordionBody>
                                             </AccordionItem>
-                                        </Accordion>
+                                        </Accordion> */}
+                                        <AccordionWrapper
+                                            header={
+                                                <li className={cx('mobile-menu-item')}>
+                                                    <Link className={cx('mobile-menu-link')} to={routes.home}>
+                                                        Cửa hàng
+                                                    </Link>
+                                                </li>
+                                            }
+                                            body={
+                                                <ul style={{ paddingLeft: '26px', paddingTop: '12px' }}>
+                                                    {categories.map((category, index) => (
+                                                        <li key={index}>
+                                                            <Link
+                                                                className={cx('mobile-menu-item-menu')}
+                                                                to={`category/${category.id}`}
+                                                            >
+                                                                {category.name}
+                                                            </Link>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            }
+                                        />
                                         <li className={cx('mobile-menu-item')}>
                                             <Link className={cx('mobile-menu-link')} to={routes.home}>
                                                 Liên hệ
